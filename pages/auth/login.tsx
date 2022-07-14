@@ -83,7 +83,7 @@ export default function Login({ csrfToken }: ServerSideProps) {
         </button>
       </form>
       <div className="mt-2 text-xs text-center">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link href="/auth/signup">
           <span className="font-bold hover:cursor-pointer">Create an account</span>
         </Link>
