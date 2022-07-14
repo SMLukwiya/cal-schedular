@@ -1,3 +1,4 @@
+import { BookingResponse } from "lib/types/booking";
 import Link from "next/link";
 
 import prisma from "@helpers/prisma";
@@ -5,9 +6,12 @@ import prisma from "@helpers/prisma";
 import Shell from "@components/Shell";
 import Booking from "@components/ui/Booking";
 
-export default function Manage(props) {
+type Props = {
+  bookings: BookingResponse[];
+};
+
+export default function Manage(props: Props) {
   const { bookings } = props;
-  console.log(bookings);
 
   return (
     <Shell>
@@ -15,15 +19,8 @@ export default function Manage(props) {
         <div className="text-xl fonts-bold">Bookings</div>
         <div className="text-sm text-gray-700">See all your events</div>
         <div>
-          {bookings.map(({ id, title, eventDate, name, email, attendees }) => (
-            <Booking
-              key={id}
-              title={title}
-              eventDate={eventDate}
-              name={name}
-              email={email}
-              attendees={attendees}
-            />
+          {bookings.map(({ id, title, eventDate, attendees }: BookingResponse) => (
+            <Booking key={id} title={title} eventDate={eventDate} attendees={attendees} />
           ))}
         </div>
         <Link href="/api/auth/signout">
