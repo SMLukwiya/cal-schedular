@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext } from "next";
 import { getCsrfToken, signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -44,34 +45,50 @@ export default function Login({ csrfToken }: ServerSideProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="csrfToken" type="hidden" defaultValue={csrfToken || undefined} hidden />
-      <input
-        id="email"
-        name="email"
-        type="email"
-        placeholder="email"
-        required
-        value={email}
-        onInput={(e) => setEmail(e.currentTarget.value)}
-        className="block border border-neutral-300 focus:ring-neutral-900"
-      />
-      <input
-        id="password"
-        name="password"
-        type="password"
-        placeholder="password"
-        autoComplete="current-password"
-        required
-        value={password}
-        onInput={(e) => setPassword(e.currentTarget.value)}
-        className="block border border-neutral-300 focus:ring-neutral-900"
-      />
+    <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-50">
+      <div className="m-3 text-xl font-bold">Sign in to your account</div>
+      <form onSubmit={handleSubmit} className="p-4 bg-white border border-gray-500 rounded-md w-80">
+        <input name="csrfToken" type="hidden" defaultValue={csrfToken || undefined} hidden />
+        <>
+          <label className="mb-1 text-sm text-gray-700">Email address</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            value={email}
+            onInput={(e) => setEmail(e.currentTarget.value)}
+            className="block w-full p-1 mb-3 text-sm border border-neutral-300 focus:ring-neutral-900"
+          />
+        </>
+        <>
+          <label className="mb-1 text-sm text-gray-700">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            required
+            value={password}
+            onInput={(e) => setPassword(e.currentTarget.value)}
+            className="block w-full p-1 mb-3 border border-neutral-300 focus:ring-neutral-900"
+          />
+        </>
 
-      <button type="submit" disabled={isSubmitting} className="p-1 text-white bg-blue-800">
-        SIGN IN
-      </button>
-    </form>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full p-1 mt-2 mb-2 text-sm text-white bg-blue-800">
+          Sign in
+        </button>
+      </form>
+      <div className="mt-2 text-xs text-center">
+        Don't have an account?{" "}
+        <Link href="/auth/signup">
+          <span className="font-bold hover:cursor-pointer">Create an account</span>
+        </Link>
+      </div>
+    </div>
   );
 }
 
