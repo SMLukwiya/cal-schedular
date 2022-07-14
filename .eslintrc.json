@@ -14,9 +14,14 @@
     "plugin:react/recommended",
     "plugin:react-hooks/recommended"
   ],
-  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "react",
+    "react-hooks"
+  ],
   "rules": {
-    "prettier/prettier": ["error"],
+    // "prettier/prettier": ["error"],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",

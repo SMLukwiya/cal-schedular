@@ -19,8 +19,8 @@ export default function Manage(props: Props) {
         <div className="text-xl fonts-bold">Bookings</div>
         <div className="text-sm text-gray-700">See all your events</div>
         <div>
-          {bookings.map(({ id, title, eventDate, attendees }: BookingResponse) => (
-            <Booking key={id} title={title} eventDate={eventDate} attendees={attendees} />
+          {bookings.map((booking) => (
+            <Booking key={booking.id} {...booking} />
           ))}
         </div>
         <Link href="/api/auth/signout">
