@@ -18,6 +18,7 @@ const Bookings = () => {
   const [date, setDate] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "title") {
@@ -36,16 +37,25 @@ const Bookings = () => {
     const eventDate = new Date(date).toISOString();
     const now = new Date().toISOString();
     if (eventDate < now) return alert("Cannot set event for past date");
-    const booking = await createBooking({ title, eventDate, name, email });
-    setTitle("");
-    setDate("");
-    setName("");
-    setEmail("");
-    return booking;
+
+    setIsSubmitting(true);
+
+    try {
+      const booking = await createBooking({ title, eventDate, name, email });
+      setIsSubmitting(false);
+      setTitle("");
+      setDate("");
+      setName("");
+      setEmail("");
+      return booking;
+    } catch (err) {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center mt-1">
+      <Button title="Home" home />
       <div>Book a meeting</div>
       <div className="text-xl font-bold">30 Min Meeting</div>
       <div className="w-96">
@@ -63,9 +73,10 @@ const Bookings = () => {
         <Input label="Name" type="text" value={name} name="name" onChange={inputHandler} />
         <Input label="Email" type="email" value={email} name="email" onChange={inputHandler} />
       </div>
-      <div>
+      <>
         <Button title="Book" onClick={bookHandler} />
-      </div>
+        {isSubmitting && <div className="m-2 text-sm text-gray-500">loading...</div>}
+      </>
     </div>
   );
 };

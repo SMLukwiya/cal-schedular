@@ -1,10 +1,21 @@
+import Link from "next/link";
+
 export type ButtonProps = {
   title: string;
   onClick?: () => void;
+  home?: boolean;
 };
 
 const Button = (props: ButtonProps) => {
-  const { title, onClick } = props;
+  const { title, onClick, home } = props;
+
+  if (home) {
+    return (
+      <button className="p-2 text-blue-800 border border-blue-800 rounded-sm">
+        <Link href="/">Home</Link>
+      </button>
+    );
+  }
 
   return (
     <div>

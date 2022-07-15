@@ -6,6 +6,8 @@ import { useState } from "react";
 
 import { getSession } from "@helpers/auth";
 
+import Button from "@components/ui/Button";
+
 interface ServerSideProps {
   csrfToken: string;
 }
@@ -46,6 +48,7 @@ export default function Login({ csrfToken }: ServerSideProps) {
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-50">
+      <Button title="Home" home />
       <div className="m-3 text-xl font-bold">Sign in to your account</div>
       <form onSubmit={handleSubmit} className="p-4 bg-white border border-gray-500 rounded-md w-80">
         <input name="csrfToken" type="hidden" defaultValue={csrfToken || undefined} hidden />
@@ -81,6 +84,7 @@ export default function Login({ csrfToken }: ServerSideProps) {
           className="w-full p-1 mt-2 mb-2 text-sm text-white bg-blue-800">
           Sign in
         </button>
+        {isSubmitting && <div className="m-2 text-sm text-gray-500">loading...</div>}
       </form>
       <div className="mt-2 text-xs text-center">
         Don&apos;t have an account?{" "}

@@ -3,6 +3,8 @@ import { getSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import Button from "@components/ui/Button";
+
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -45,6 +47,7 @@ export default function Signup() {
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-50">
+      <Button title="Home" home />
       <div className="m-3 text-xl font-bold">Create your account</div>
       <form onSubmit={handleSubmit} className="p-4 bg-white border border-gray-500 rounded-md w-80">
         <>
@@ -84,13 +87,13 @@ export default function Signup() {
             className="block w-full p-1 mb-3 text-sm border border-neutral-300 focus:ring-neutral-900"
           />
         </>
-
         <button
           type="submit"
           disabled={isSubmitting}
           className="w-full p-1 mt-2 mb-2 text-sm text-white bg-blue-800">
           Sign up
         </button>
+        {isSubmitting && <div className="m-2 text-sm text-gray-500">loading...</div>}
       </form>
       <div className="mt-2 text-xs text-center">
         Already have an account?{" "}
