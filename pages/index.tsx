@@ -14,18 +14,20 @@ export default function Index() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full pt-8">
-      <div>
-        <Link href="/auth/login">
-          <a className="p-2 overflow-hidden text-white bg-blue-800 rounded-sm">LOGIN</a>
-        </Link>
-        <Link href="/auth/signup">
-          <a className="p-2 ml-2 text-white bg-blue-800 rounded-sm">SIGN UP</a>
-        </Link>
-      </div>
-      <div className="mt-5">
-        <Link href="/bookings">
-          <a className="p-2 ml-2 text-white bg-blue-800 rounded-sm">Book </a>
-        </Link>
+      <div className="flex flex-col items-center p-3 border border-gray-500 rounded-md">
+        <div className="m-2">
+          <Link href="/auth/login">
+            <a className="p-2 overflow-hidden text-white bg-blue-800 rounded-sm">LOGIN</a>
+          </Link>
+          <Link href="/auth/signup">
+            <a className="p-2 ml-2 text-white bg-blue-800 rounded-sm">SIGN UP</a>
+          </Link>
+        </div>
+        <div className="mt-5">
+          <Link href="/bookings">
+            <a className="p-2 ml-2 text-white bg-blue-800 rounded-sm">Book A Meeting</a>
+          </Link>
+        </div>
       </div>
     </div>
   );

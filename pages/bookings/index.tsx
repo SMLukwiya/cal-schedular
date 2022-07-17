@@ -47,9 +47,11 @@ const Bookings = () => {
       setDate("");
       setName("");
       setEmail("");
+      alert("Booking successful");
       return booking;
     } catch (err) {
       setIsSubmitting(false);
+      alert("Error ocurred, please try again");
     }
   };
 
