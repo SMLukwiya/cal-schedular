@@ -1,4 +1,4 @@
-import { BookingCreateBody } from "@pages/bookings";
+import { BookingCreateBody } from "lib/types/booking";
 
 const createBooking = async (data: BookingCreateBody) => {
   const response = await fetch("/api/book/create-event", {

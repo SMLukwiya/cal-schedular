@@ -7,6 +7,7 @@ import Button from "@components/ui/Button";
 
 export default function Signup() {
   const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,6 +32,7 @@ export default function Signup() {
     return axios
       .post("/api/auth/signup", {
         name,
+        username,
         email,
         password,
       })
@@ -59,6 +61,18 @@ export default function Signup() {
             required
             value={name}
             onInput={(e) => setName(e.currentTarget.value)}
+            className="block w-full p-1 mb-3 text-sm border border-neutral-300 focus:ring-neutral-900"
+          />
+        </>
+        <>
+          <label className="mb-1 text-sm text-gray-700">Username</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            required
+            value={username}
+            onInput={(e) => setUsername(e.currentTarget.value)}
             className="block w-full p-1 mb-3 text-sm border border-neutral-300 focus:ring-neutral-900"
           />
         </>

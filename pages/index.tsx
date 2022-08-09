@@ -24,7 +24,7 @@ export default function Index() {
           </Link>
         </div>
         <div className="mt-5">
-          <Link href="/bookings">
+          <Link href="/johndoe">
             <a className="p-2 ml-2 text-white bg-blue-800 rounded-sm">Book A Meeting</a>
           </Link>
         </div>

@@ -1,12 +1,12 @@
 import NextAuth from "next-auth";
-import CredentialProvider from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 import { verifyPassword } from "@helpers/auth";
 import prisma from "@helpers/prisma";
 
 export default NextAuth({
   providers: [
-    CredentialProvider({
+    CredentialsProvider({
       name: "credentials",
       credentials: {
         email: {
@@ -14,6 +14,7 @@ export default NextAuth({
           type: "email",
           placeholder: "john@test.com",
         },
+        // username: { label: "Username", type: "text", placeholder: "john" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: Record<"email" | "password", string> | undefined) {

@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const data = req.body;
-  const { email, password, name } = data;
+  const { email, password, name, username } = data;
   const userEmail = email.toLowerCase();
 
   if (!userEmail || !userEmail.includes("@")) {
@@ -34,13 +34,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const hashedPassword = await hashPassword(password);
 
-  await prisma.user.create({
-    data: {
-      name,
-      email: userEmail,
-      password: hashedPassword,
-    },
-  });
+  try {
+    await prisma.user.create({
+      data: {
+        name,
+        username,
+        email: userEmail,
+        password: hashedPassword,
+      },
+    });
+  } catch (err) {
+    console.error("Sign up error ---- ", err);
+  }
 
   res.status(201).json({ message: "Created user" });
 }

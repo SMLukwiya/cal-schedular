@@ -2,19 +2,47 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import prisma from "@helpers/prisma";
 
-const createEvent = async (req: NextApiRequest, res: NextApiResponse) => {
+const createBooking = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST") {
     return res.status(405).json({ msg: "Method is not allowed" });
   }
 
-  const { title, eventDate, name, email } = JSON.parse(req.body);
+  const { notes, eventDate, name, email, guests, user } = JSON.parse(req.body);
+
+  const invitee = [{ name, email }];
+  const others = (guests || []).map((guest: string[]) => ({
+    email: guest,
+    name: "",
+  }));
+
+  const attendees = [...invitee, ...others];
+
+  const organizerUser = await prisma.user.findUnique({
+    where: {
+      username: user,
+    },
+  });
+
+  if (!organizerUser) throw new Error("Can't continue, user not found");
 
   const newBooking = await prisma.booking.create({
     data: {
-      title,
+      description: notes,
       eventDate,
       attendees: {
-        create: { name, email },
+        createMany: {
+          data: attendees.map((attendee) => {
+            return {
+              name: attendee.name,
+              email: attendee.email,
+            };
+          }),
+        },
+      },
+      user: {
+        connect: {
+          id: organizerUser.id,
+        },
       },
     },
   });
@@ -22,4 +50,4 @@ const createEvent = async (req: NextApiRequest, res: NextApiResponse) => {
   return res.status(201).json(newBooking);
 };
 
-export default createEvent;
+export default createBooking;

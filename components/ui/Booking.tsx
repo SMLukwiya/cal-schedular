@@ -1,7 +1,7 @@
 import { BookingResponse } from "lib/types/booking";
 
 const Booking = (props: BookingResponse) => {
-  const { eventDate, title, attendees } = props;
+  const { eventDate, description, attendees } = props;
 
   return (
     <div className="flex m-2">
@@ -11,7 +11,7 @@ const Booking = (props: BookingResponse) => {
       </div>
       <div>
         <div className="text-sm font-bold">30 Min Meeting between Lukwiya and {attendees[0].name}</div>
-        <div className="text-xs text-gray-600">{title}</div>
+        <div className="text-xs text-gray-600">{description}</div>
         <div className="text-xs text-gray-600">{attendees[0].email}</div>
       </div>
     </div>
