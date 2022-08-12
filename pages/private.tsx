@@ -1,6 +1,8 @@
 import { BookingResponse } from "lib/types/booking";
+import { GetServerSidePropsContext } from "next";
 import Link from "next/link";
 
+import { getSession } from "@helpers/auth";
 import prisma from "@helpers/prisma";
 
 import Shell from "@components/Shell";
@@ -33,8 +35,14 @@ export default function Manage(props: Props) {
   );
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const { req } = context;
+  const session = await getSession({ req });
+
   const bookings = await prisma.booking.findMany({
+    where: {
+      userId: session?.id as number,
+    },
     include: {
       attendees: true,
     },

@@ -56,7 +56,7 @@ const BookingPage = (props: BookPageProps) => {
   };
 
   return (
-    <div>
+    <div className="mt-4">
       <main className="max-w-3xl mx-auto my-0">
         <div className="overflow-hidden bg-gray-800 border border-gray-600 rounded-md sm:border">
           <div className="px-4 py-5 sm:flex sm:p-4">
